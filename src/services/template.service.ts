@@ -37,7 +37,7 @@ const updateTemplate = (
   id: string,
   { title, content }: UpsertTemplate
 ): Template => {
-  const template = getTemplateById(id);
+  const template = findTemplateById(id);
 
   if (!template) {
     throw new NotFoundException(`Template with id ${id} not found`);
@@ -49,7 +49,7 @@ const updateTemplate = (
 };
 
 const deleteTemplate = (id: string): void => {
-  const template = getTemplateById(id);
+  const template = findTemplateById(id);
 
   if (!template) {
     throw new NotFoundException(`Template with id ${id} not found`);

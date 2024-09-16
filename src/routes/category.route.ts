@@ -1,39 +1,39 @@
 import express, { Request, Response } from "express";
 import { NotFoundException } from "../exceptions/not-found.exception";
 import {
-  getAllTemplates,
-  createTemplate,
-  getTemplateById,
-  updateTemplate,
-  deleteTemplate,
-} from "../services/template.service";
+  getAllCategories,
+  createCategory,
+  getCategoryById,
+  updateCategory,
+  deleteCategory,
+} from "../services/category.service";
 
 const router = express.Router();
 
-router.get("/templates", (_req: Request, res: Response) => {
-  res.json(getAllTemplates());
+router.get("/categories", (_req: Request, res: Response) => {
+  res.json(getAllCategories());
 });
 
-router.post("/templates", (req: Request, res: Response) => {
-  const { title, content } = req.body;
-  res.status(201).json(createTemplate({ title, content }));
+router.post("/categories", (req: Request, res: Response) => {
+  const { name, description } = req.body;
+  res.status(201).json(createCategory({ name, description }));
 });
 
-router.get("/templates/:id", (req: Request, res: Response) => {
+router.get("/categories/:id", (req: Request, res: Response) => {
   try {
-    const template = getTemplateById(req.params.id);
-    res.json(template);
+    const category = getCategoryById(req.params.id);
+    res.json(category);
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }
 });
 
-router.put("/templates/:id", (req: Request, res: Response) => {
+router.put("/categories/:id", (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { title, content } = req.body;
-    const template = updateTemplate(id, { title, content });
-    res.json(template);
+    const { name, description } = req.body;
+    const category = updateCategory(id, { name, description });
+    res.json(category);
   } catch (error: any) {
     if (error instanceof NotFoundException) {
       return res.status(404).json({ message: error.message });
@@ -45,9 +45,9 @@ router.put("/templates/:id", (req: Request, res: Response) => {
   }
 });
 
-router.delete("/templates/:id", (req: Request, res: Response) => {
+router.delete("/categories/:id", (req: Request, res: Response) => {
   try {
-    deleteTemplate(req.params.id);
+    deleteCategory(req.params.id);
     res.send(204);
   } catch (error: any) {
     if (error instanceof NotFoundException) {
