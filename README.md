@@ -3,6 +3,7 @@ API para gerenciamento de templates de prompts com integração à API gemini do
 ## Desafio
 
 - Dia 01: Setup básico da aplicação + integração com Gemini
+- Dia 02: Salvar prompts e setup do ambiente de testes
 
 ## 👩 Author
 
