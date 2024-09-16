@@ -47,6 +47,8 @@ const updateCategory = (
 
   if (description) {
     category.description = description;
+  } else {
+    category.description = "";
   }
 
   return category;
