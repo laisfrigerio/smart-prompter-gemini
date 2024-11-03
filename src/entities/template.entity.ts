@@ -7,7 +7,7 @@ export class Template {
   private content: string;
   private categories: Category[];
 
-  constructor(id: string, title: string, content: string, categories: Category[] = []) {
+  private constructor(id: string, title: string, content: string, categories: Category[] = []) {
     this.id = id;
     this.title = title;
     this.content = content;
