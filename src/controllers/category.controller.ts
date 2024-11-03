@@ -50,8 +50,8 @@ router.put("/categories/:id", (req: Request, res: Response) => {
 
 router.delete("/categories/:id", (req: Request, res: Response) => {
   try {
-    const category = deleteCategory(req.params.id);
-    res.json(category);
+    deleteCategory(req.params.id);
+    res.sendStatus(204);
   } catch (error: any) {
     if (error instanceof NotFoundException) {
       res.status(404)

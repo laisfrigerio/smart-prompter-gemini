@@ -50,8 +50,8 @@ router.put("/templates/:id", (req: Request, res: Response) => {
 
 router.delete("/templates/:id", (req: Request, res: Response) => {
   try {
-    const template = deleteTemplate(req.params.id);
-    res.json(template);
+    deleteTemplate(req.params.id);
+    res.sendStatus(204);
   } catch (error: any) {
     if (error instanceof NotFoundException) {
       res.status(404)
