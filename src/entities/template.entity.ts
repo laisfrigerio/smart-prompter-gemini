@@ -50,6 +50,10 @@ export class Template {
     this.content = content;
   }
 
+  setCategories (categories: Category[]) {
+    this.categories = categories;
+  }
+
   private findByCategory (category: Category) {
     return this.categories.find((c: Category) => category.getId() === c.getId());
   }
