@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 
-import { chat } from "../usecases/chat.usecase";
+import { chat } from "../services/chat.service";
 
 const router = express.Router();
 

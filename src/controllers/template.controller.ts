@@ -17,7 +17,7 @@ router.get("/templates", (_req: Request, res: Response) => {
 
 router.post("/templates", (req: Request, res: Response) => {
   const { title, content } = req.body;
-  res.sendStatus(201)
+  res.status(201)
     .json(createTemplate({ title, content }));
 });
 
@@ -26,7 +26,7 @@ router.get("/templates/:id", (req: Request, res: Response) => {
     const template = getTemplateById(req.params.id);
     res.json(template);
   } catch (error: any) {
-    res.sendStatus(404)
+    res.status(404)
       .json({ message: error.message });
   }
 });
@@ -39,10 +39,10 @@ router.put("/templates/:id", (req: Request, res: Response) => {
     res.json(template);
   } catch (error: any) {
     if (error instanceof NotFoundException) {
-      res.sendStatus(404)
+      res.status(404)
         .json({ message: error.message });
     } else {
-      res.sendStatus(500)
+      res.status(500)
         .json({ message: `Unexpected error: ${error.message}` });
     }
   }
@@ -54,10 +54,10 @@ router.delete("/templates/:id", (req: Request, res: Response) => {
     res.json(template);
   } catch (error: any) {
     if (error instanceof NotFoundException) {
-      res.sendStatus(404)
+      res.status(404)
         .json({ message: error.message });
     } else {
-      res.sendStatus(500)
+      res.status(500)
         .json({ message: `Unexpected error: ${error.message}` });
     } 
   }
