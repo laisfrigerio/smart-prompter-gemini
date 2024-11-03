@@ -7,7 +7,7 @@ export class Category {
   private description: string;
   private templates: Template[];
 
-  private constructor(id: string, name: string, description: string = "", templates: Template[] = []) {
+  constructor(id: string, name: string, description: string = "", templates: Template[] = []) {
     this.id = id;
     this.name = name;
     this.description = description;
@@ -40,6 +40,14 @@ export class Category {
 
   getTemplates(): Template[] {
     return this.templates;
+  }
+
+  setName (name: string) {
+    this.name = name;
+  }
+
+  setDescription (description: string) {
+    this.description = description;
   }
 
   private findByTemplate (template: Template) {

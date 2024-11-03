@@ -19,7 +19,7 @@ const removeCategory = (id: string) => {
   categories = categories.filter((category: Category) => category.getId() !== id);
 };
 
-const resetCategoriessDb = () => {
+const resetCategoriesDb = () => {
   categories = [];
 };
 
@@ -28,5 +28,5 @@ export {
   findAllCategories,
   saveCategory,
   removeCategory,
-  resetCategoriessDb,
+  resetCategoriesDb,
 };

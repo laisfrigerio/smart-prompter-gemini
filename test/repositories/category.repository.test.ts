@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 
 import {
-  resetCategoriessDb,
+  resetCategoriesDb,
   findAllCategories,
   findCategoryById,
   saveCategory,
@@ -14,7 +14,7 @@ jest.mock("uuid");
 
 describe("CRUD Repository de Categories", () => {
   beforeEach(() => {
-    resetCategoriessDb();
+    resetCategoriesDb();
   });
 
   test("deve retornar uma lista vazia quando nenhuma categoria foi cadastrada", () => {
