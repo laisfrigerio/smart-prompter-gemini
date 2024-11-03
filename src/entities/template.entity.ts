@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import Category from "./category.entity"
+import { Category } from "./category.entity"
 
 export class Template {
   private id: string;
@@ -7,7 +7,7 @@ export class Template {
   private content: string;
   private categories: Category[];
 
-  private constructor(id: string, title: string, content: string, categories: Category[] = []) {
+  constructor(id: string, title: string, content: string, categories: Category[] = []) {
     this.id = id;
     this.title = title;
     this.content = content;
