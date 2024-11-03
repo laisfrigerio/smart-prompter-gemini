@@ -1,20 +1,20 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Template } from './template.entity';
 
-class Category {
+export class Category {
   private id: string;
   private name: string;
   private description: string;
   private templates: Template[];
 
-  constructor(id: string, name: string, description: string, templates: Template[] = []) {
+  private constructor(id: string, name: string, description: string = "", templates: Template[] = []) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.templates = templates;
   }
 
-  static create(name: string, description: string, templates: Template[] = []): Category {
+  static create(name: string, description: string = "", templates: Template[] = []): Category {
     const id = uuidv4();
     return new Category(id, name, description, templates);
   }
@@ -46,5 +46,3 @@ class Category {
     return this.templates.find((t: Template) => template.getId() === t.getId());
   }
 }
-
-export default Category;

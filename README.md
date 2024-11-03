@@ -6,7 +6,7 @@ API para gerenciamento de templates de prompts com integração à API gemini do
 
 - [x] Dia 01: Setup básico da aplicação + integração com Gemini
 - [x] Dia 02: Salvar prompts e setup do ambiente de testes
-- [ ] Dia 03: Criando CRUD de tags e testes de unidade com mocks
+- [ ] Dia 03: Criando CRUD de categorias e testes de unidade com mocks
 - [ ] Dia 04: Escrevendo testes de integração
 - [ ] Dia 05: Categorizando os prompts
 - [ ] Dia 06: Filtrando os prompts por categorização e mais testes automatizados
