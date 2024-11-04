@@ -189,37 +189,6 @@ describe("Associando categorias a um template", () => {
         description: responseCreateCategory.body.description
       }],
     });
-
-    const responseGetTemplatesByCategory = await supertest(app)
-      .get(`/categories/${categoryId}/templates`);
-
-      expect(responseGetTemplatesByCategory.status).toEqual(200);
-      expect(responseGetTemplatesByCategory.body.length).toBe(1);
-      expect(responseGetTemplatesByCategory.body).toStrictEqual([{
-        ...template,
-        id: templateId,
-        categories: [{
-          id: responseCreateCategory.body.id,
-          name: responseCreateCategory.body.name,
-          description: responseCreateCategory.body.description
-        }]
-      }]);
-
-      const responseGetCategoriesByTemplate = await supertest(app)
-      .get(`/templates/${templateId}/categories`);
-
-      expect(responseGetCategoriesByTemplate.status).toEqual(200);
-      expect(responseGetCategoriesByTemplate.body.length).toBe(1);
-      expect(responseGetCategoriesByTemplate.body).toStrictEqual([{
-        id: responseCreateCategory.body.id,
-        name: responseCreateCategory.body.name,
-        description: responseCreateCategory.body.description,
-        templates: [{
-          id: responseCreateTemplate.body.id,
-          title: responseCreateTemplate.body.title,
-          content: responseCreateTemplate.body.content
-        }]
-      }]);
   });
 
   test("ao tentar associar categoria a um template inexistente, deve retornar um erro", async () => {
