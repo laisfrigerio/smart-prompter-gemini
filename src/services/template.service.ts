@@ -15,16 +15,9 @@ import {
   detachCategoryFromTemplate,
 } from "../repositories/template.repository";
 import { findCategoryById } from "../repositories/category.repository";
-import { Category } from "../entities/category.entity";
 
 const getAllTemplates = (): Template[] => {
   return findAllTemplates();
-};
-
-const getCategoriesByTemplate = (templateId: string): Category[] => {
-  const template = findTemplateById(templateId);
-  if (!template) throw new NotFoundException(`Template with id ${templateId} not found`);
-  return template.getCategories();
 };
 
 const createTemplate = ({ title, content }: UpsertTemplate): Template => {
@@ -96,7 +89,6 @@ const resetTemplates = (): void => {
 
 export {
   getAllTemplates,
-  getCategoriesByTemplate,
   createTemplate,
   getTemplateById,
   updateTemplate,

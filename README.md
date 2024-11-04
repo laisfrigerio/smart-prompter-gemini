@@ -9,7 +9,7 @@ API para gerenciamento de templates de prompts com integração à API gemini do
 - [x] Dia 03: Criando CRUD de categorias e testes de unidade com mocks
 - [x] Dia 04: Escrevendo testes de integração
 - [x] Dia 05: Categorizando os prompts
-- [x] Dia 06: Filtrando os prompts por categorização e mais testes automatizados
+- [ ] Dia 06: Filtrando os prompts por categorização e mais testes automatizados
 - [ ] Dia 07: Integração contínua com Github Actions
 
 ## Rotas - Templates
@@ -232,54 +232,4 @@ curl -H 'Content-Type: application/json' -X DELETE http://localhost:3000/templat
   "content": "Prompt content",
   "categories": []
 }
-```
-
-## Rotas - Templates por categoria
-
-- GET:
-
-```sh
-curl 'Content-Type: application/json' http://localhost:3000/categories/297c2b12-c47f-43ce-8fad-0864d36fe8f8/templates
-```
-
-- Exemplo de resposta:
-
-```json
-[
-  {
-    "id": "297c2b12-c47f-43ce-8fad-0864d36fe8f8",
-    "title": "Capital do estado do Paraná",
-    "content": "Qual a capital do estado do Paraná situada na região sul do Brasil?",,
-    "categories": [{
-      "id": "297c2b12-c47f-43ce-8fad-0864d36fe8f8",
-      "name": "Java",
-      "description": "Linguagem de Programação",
-    }]
-  }
-]
-```
-
-## Rotas - Categorias por template
-
-- GET:
-
-```sh
-curl 'Content-Type: application/json' http://localhost:3000/templates/297c2b12-c47f-43ce-8fad-0864d36fe8f8/categories
-```
-
-- Exemplo de resposta:
-
-```json
-[
-  {
-    "id": "297c2b12-c47f-43ce-8fad-0864d36fe8f8",
-    "name": "Java",
-    "description": "Linguagem de Programação",
-    "templates": [{
-      "id": "297c2b12-c47f-43ce-8fad-0864d36fe8f8",
-      "title": "Capital do estado do Paraná",
-      "content": "Qual a capital do estado do Paraná situada na região sul do Brasil?",
-    }]
-  }
-]
 ```

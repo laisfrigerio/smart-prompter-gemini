@@ -9,30 +9,13 @@ import {
   deleteTemplate,
   attachCategory,
   detachCategory,
-  getCategoriesByTemplate,
 } from "../services/template.service";
 import { getSimplifiedTemplate } from "../adapters/template.adapter";
-import { getSimplifiedCategory } from "../adapters/category.adapter";
 
 const router = express.Router();
 
 router.get("/templates", (_req: Request, res: Response) => {
   res.json(getAllTemplates().map(template => getSimplifiedTemplate(template)));
-});
-
-router.get("/templates/:templateId/categories", (req: Request, res: Response) => {
-  try {
-    const { templateId } = req.params;
-    const categories = getCategoriesByTemplate(templateId);
-    res.json(categories.map(category => getSimplifiedCategory(category)));
-  } catch (error: any) {
-    if (error instanceof NotFoundException) {
-      res.status(404)
-        .json({ message: error.message });
-    } else {
-      res.status(500).json({ message: `Unexpected error: ${error.message}` });
-    }
-  }
 });
 
 router.post("/templates", (req: Request, res: Response) => {
