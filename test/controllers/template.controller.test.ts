@@ -153,7 +153,7 @@ describe("Testando rotas de template", () => {
 });
 
 describe("Associando categorias a um template", () => {
-  test("deve associar uma categoria a um template", async () => {
+  test.only("deve associar uma categoria a um template", async () => {
     const template = {
       title: "Template 1",
       content: "Conteúdo do template 1",
@@ -189,6 +189,21 @@ describe("Associando categorias a um template", () => {
         description: responseCreateCategory.body.description
       }],
     });
+
+    const responseGetTemplatesByCategory = await supertest(app)
+      .get(`/categories/${categoryId}/templates`);
+
+      expect(responseGetTemplatesByCategory.status).toEqual(200);
+      expect(responseGetTemplatesByCategory.body.length).toBe(1);
+      expect(responseGetTemplatesByCategory.body).toStrictEqual([{
+        ...template,
+        id: templateId,
+        categories: [{
+          id: responseCreateCategory.body.id,
+          name: responseCreateCategory.body.name,
+          description: responseCreateCategory.body.description
+        }]
+      }]);
   });
 
   test("ao tentar associar categoria a um template inexistente, deve retornar um erro", async () => {

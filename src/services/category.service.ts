@@ -12,9 +12,16 @@ import {
   removeCategory, 
   resetCategoriesDb
 } from "../repositories/category.repository";
+import { Template } from "../entities/template.entity";
 
 const getAllCategories = (): Category[] => {
   return findAllCategories();
+};
+
+const getTemplatesByCategory = (categoryId: string): Template[] => {
+  const category = findCategoryById(categoryId);
+  if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
+  return category.getTemplates();
 };
 
 const createCategory = ({ name, description }: UpsertCategory): Category => {
@@ -70,6 +77,7 @@ const resetCategories = (): void => {
 
 export {
   getAllCategories,
+  getTemplatesByCategory,
   createCategory,
   getCategoryById,
   updateCategory,

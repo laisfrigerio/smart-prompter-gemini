@@ -7,14 +7,31 @@ import {
   getCategoryById,
   updateCategory,
   deleteCategory,
+  getTemplatesByCategory,
 } from "../services/category.service";
 
 import { getSimplifiedCategory } from "../adapters/category.adapter";
+import { getSimplifiedTemplate } from "../adapters/template.adapter";
 
 const router = express.Router();
 
 router.get("/categories", (_req: Request, res: Response) => {
   res.json(getAllCategories().map(category => getSimplifiedCategory(category)));
+});
+
+router.get("/categories/:categoryId/templates", (req: Request, res: Response) => {
+  try {
+    const { categoryId } = req.params;
+    const templates = getTemplatesByCategory(categoryId);
+    res.json(templates.map(template => getSimplifiedTemplate(template)));
+  } catch (error: any) {
+    if (error instanceof NotFoundException) {
+      res.status(404)
+        .json({ message: error.message });
+    } else {
+      res.status(500).json({ message: `Unexpected error: ${error.message}` });
+    }
+  }
 });
 
 router.post("/categories", (req: Request, res: Response) => {
