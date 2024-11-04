@@ -9,7 +9,7 @@ API para gerenciamento de templates de prompts com integração à API gemini do
 - [x] Dia 03: Criando CRUD de categorias e testes de unidade com mocks
 - [x] Dia 04: Escrevendo testes de integração
 - [x] Dia 05: Categorizando os prompts
-- [ ] Dia 06: Filtrando os prompts por categorização e mais testes automatizados
+- [x] Dia 06: Adicionando documentação swagger
 - [ ] Dia 07: Integração contínua com Github Actions
 
 ## Rotas - Templates
