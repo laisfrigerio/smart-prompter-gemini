@@ -3,4 +3,17 @@ interface UpsertCategory {
   description?: string;
 }
 
-export { UpsertCategory };
+type SimplifiedTemplate = {
+  id: string;
+  title: string;
+  content: string;
+}
+
+type SimplifieCategory = {
+  id: string;
+  name: string;
+  description?: string;
+  templates: SimplifiedTemplate[];
+}
+
+export { UpsertCategory, SimplifieCategory };

@@ -9,10 +9,12 @@ import {
   deleteCategory,
 } from "../services/category.service";
 
+import { getSimplifiedCategory } from "../adapters/category.adapter";
+
 const router = express.Router();
 
 router.get("/categories", (_req: Request, res: Response) => {
-  res.json(getAllCategories());
+  res.json(getAllCategories().map(category => getSimplifiedCategory(category)));
 });
 
 router.post("/categories", (req: Request, res: Response) => {
@@ -24,7 +26,7 @@ router.post("/categories", (req: Request, res: Response) => {
 router.get("/categories/:id", (req: Request, res: Response) => {
   try {
     const category = getCategoryById(req.params.id);
-    res.json(category);
+    res.json(getSimplifiedCategory(category));
   } catch (error: any) {
     res.status(404)
       .json({ message: error.message });
@@ -36,7 +38,7 @@ router.put("/categories/:id", (req: Request, res: Response) => {
     const { id } = req.params;
     const { name, description } = req.body;
     const category = updateCategory(id, { name, description });
-    res.json(category);
+    res.json(getSimplifiedCategory(category));
   } catch (error: any) {
     if (error instanceof NotFoundException) {
       res.status(404)

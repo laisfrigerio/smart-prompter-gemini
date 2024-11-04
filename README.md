@@ -8,7 +8,7 @@ API para gerenciamento de templates de prompts com integração à API gemini do
 - [x] Dia 02: Salvar prompts e setup do ambiente de testes
 - [x] Dia 03: Criando CRUD de categorias e testes de unidade com mocks
 - [x] Dia 04: Escrevendo testes de integração
-- [ ] Dia 05: Categorizando os prompts
+- [x] Dia 05: Categorizando os prompts
 - [ ] Dia 06: Filtrando os prompts por categorização e mais testes automatizados
 - [ ] Dia 07: Integração contínua com Github Actions
 
@@ -186,4 +186,50 @@ curl -H 'Content-Type: application/json' -X PUT http://localhost:3000/categories
 
 ```sh
 curl -H 'Content-Type: application/json' -X DELETE http://localhost:3000/categories/7befb756-9dad-48c0-a5a7-3a0c3d20a3fc
+```
+
+## Rotas - Categoriação de templates
+
+### Attach
+
+- POST:
+
+```sh
+curl -H 'Content-Type: application/json' -X POST http://localhost:3000/templates/4860843a-9d01-4fb8-8985-c1ce02602c27/categories/28156d6e-840d-4fed-b1ed-af0b5a3dfb7a
+```
+
+- Exemplo de resposta:
+
+```json
+{
+  "id": "4860843a-9d01-4fb8-8985-c1ce02602c27",
+  "title": "Capital do estado do Paraná",
+  "content": "Qual a capital do estado do Paraná situada na região sul do Brasil?",
+  "categories": [
+    {
+      "id": "28156d6e-840d-4fed-b1ed-af0b5a3dfb7a",
+      "name": "Java",
+      "description": "Linguagem de Programação"
+    }
+  ]
+}
+```
+
+### Detach
+
+- DELETE:
+
+```sh
+curl -H 'Content-Type: application/json' -X DELETE http://localhost:3000/templates/4860843a-9d01-4fb8-8985-c1ce02602c27/categories/28156d6e-840d-4fed-b1ed-af0b5a3dfb7a
+```
+
+- Exemplo de resposta:
+
+```json
+{
+  "id": "297c2b12-c47f-43ce-8fad-0864d36fe8f8",
+  "title": "Prompt title",
+  "content": "Prompt content",
+  "categories": []
+}
 ```
