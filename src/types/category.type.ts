@@ -3,4 +3,10 @@ interface UpsertCategory {
   description?: string;
 }
 
-export { UpsertCategory };
+type SimplifieCategory = {
+  id: string;
+  name: string;
+  description?: string;
+}
+
+export { UpsertCategory, SimplifieCategory };

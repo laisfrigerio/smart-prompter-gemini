@@ -7,7 +7,10 @@ import {
   getTemplateById,
   updateTemplate,
   deleteTemplate,
+  attachCategory,
+  detachCategory,
 } from "../services/template.service";
+import { getSimplifiedTemplate } from "../adapters/template.adapter";
 
 const router = express.Router();
 
@@ -60,6 +63,36 @@ router.delete("/templates/:id", (req: Request, res: Response) => {
       res.status(500)
         .json({ message: `Unexpected error: ${error.message}` });
     } 
+  }
+});
+
+router.post("/templates/:templateId/categories/:categoryId", (req: Request, res: Response) => {
+  try {
+    const { templateId, categoryId } = req.params;
+    const updatedTemplate = attachCategory(templateId, categoryId);
+    res.json(getSimplifiedTemplate(updatedTemplate));
+  } catch (error: any) {
+    if (error instanceof NotFoundException) {
+      res.status(404)
+        .json({ message: error.message });
+    } else {
+      res.status(500).json({ message: `Unexpected error: ${error.message}` });
+    }
+  }
+});
+
+router.delete("/templates/:templateId/categories/:categoryId", (req: Request, res: Response) => {
+  try {
+    const { templateId, categoryId } = req.params;
+    const updatedTemplate = detachCategory(templateId, categoryId);
+    res.json(getSimplifiedTemplate(updatedTemplate));
+  } catch (error: any) {
+    if (error instanceof NotFoundException) {
+      res.status(404)
+        .json({ message: error.message });
+    } else {
+      res.status(500).json({ message: `Unexpected error: ${error.message}` });
+    }
   }
 });
 

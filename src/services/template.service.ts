@@ -11,7 +11,10 @@ import {
   saveTemplate,
   removeTemplate,
   resetTemplatesDb,
+  attachCategoryToTemplate,
+  detachCategoryFromTemplate,
 } from "../repositories/template.repository";
+import { findCategoryById } from "../repositories/category.repository";
 
 const getAllTemplates = (): Template[] => {
   return findAllTemplates();
@@ -59,6 +62,27 @@ const deleteTemplate = (id: string): void => {
   removeTemplate(id);
 };
 
+const attachCategory = (templateId: string, categoryId: string): Template => {
+  const template = findTemplateById(templateId);
+  const category = findCategoryById(categoryId);
+
+  if (!template) throw new NotFoundException(`Template with id ${templateId} not found`);
+  if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
+
+  return attachCategoryToTemplate(template, category);
+};
+
+
+const detachCategory = (templateId: string, categoryId: string): Template => {
+  const template = findTemplateById(templateId);
+  const category = findCategoryById(categoryId);
+
+  if (!template) throw new NotFoundException(`Template with id ${templateId} not found`);
+  if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
+
+  return detachCategoryFromTemplate(template, category);
+};
+
 const resetTemplates = (): void => {
   resetTemplatesDb();
 };
@@ -69,5 +93,7 @@ export {
   getTemplateById,
   updateTemplate,
   deleteTemplate,
+  attachCategory,
+  detachCategory,
   resetTemplates,
 };
