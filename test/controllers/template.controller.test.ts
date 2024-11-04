@@ -153,7 +153,7 @@ describe("Testando rotas de template", () => {
 });
 
 describe("Associando categorias a um template", () => {
-  test.only("deve associar uma categoria a um template", async () => {
+  test("deve associar uma categoria a um template", async () => {
     const template = {
       title: "Template 1",
       content: "Conteúdo do template 1",
@@ -202,6 +202,22 @@ describe("Associando categorias a um template", () => {
           id: responseCreateCategory.body.id,
           name: responseCreateCategory.body.name,
           description: responseCreateCategory.body.description
+        }]
+      }]);
+
+      const responseGetCategoriesByTemplate = await supertest(app)
+      .get(`/templates/${templateId}/categories`);
+
+      expect(responseGetCategoriesByTemplate.status).toEqual(200);
+      expect(responseGetCategoriesByTemplate.body.length).toBe(1);
+      expect(responseGetCategoriesByTemplate.body).toStrictEqual([{
+        id: responseCreateCategory.body.id,
+        name: responseCreateCategory.body.name,
+        description: responseCreateCategory.body.description,
+        templates: [{
+          id: responseCreateTemplate.body.id,
+          title: responseCreateTemplate.body.title,
+          content: responseCreateTemplate.body.content
         }]
       }]);
   });
