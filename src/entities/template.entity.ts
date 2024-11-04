@@ -26,6 +26,14 @@ export class Template {
     }
   }
 
+  removeCategory(category: Category) {
+    if (this.findByCategory(category)) {
+      const newCategories = this.getCategories().filter(cat => cat.getId() !== category.getId());
+      this.setCategories(newCategories);
+      category.removeTemplate(this);
+    }
+  }
+
   getId(): string {
     return this.id;
   }

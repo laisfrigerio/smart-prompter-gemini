@@ -26,8 +26,7 @@ const attachCategoryToTemplate = (template: Template, category: Category): Templ
 };
 
 const detachCategoryFromTemplate = (template: Template, category: Category): Template => {
-  const categories = template.getCategories().filter(cat => cat.getId() !== category.getId());
-  template.setCategories(categories);
+  template.removeCategory(category);
   return template;
 };
 

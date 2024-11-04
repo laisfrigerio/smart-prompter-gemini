@@ -15,7 +15,7 @@ import { getSimplifiedTemplate } from "../adapters/template.adapter";
 const router = express.Router();
 
 router.get("/templates", (_req: Request, res: Response) => {
-  res.json(getAllTemplates());
+  res.json(getAllTemplates().map(template => getSimplifiedTemplate(template)));
 });
 
 router.post("/templates", (req: Request, res: Response) => {
@@ -27,7 +27,7 @@ router.post("/templates", (req: Request, res: Response) => {
 router.get("/templates/:id", (req: Request, res: Response) => {
   try {
     const template = getTemplateById(req.params.id);
-    res.json(template);
+    res.json(getSimplifiedTemplate(template));
   } catch (error: any) {
     res.status(404)
       .json({ message: error.message });

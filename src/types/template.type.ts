@@ -1,15 +1,19 @@
-import { SimplifieCategory } from "./category.type";
-
 type UpsertTemplate = {
   title: string;
   content: string;
 }
 
-type Simplifiedemplate = {
+type SimplifieCategory = {
+  id: string;
+  name: string;
+  description?: string;
+}
+
+type SimplifiedTemplate = {
   id: string;
   title: string;
   content: string;
   categories: SimplifieCategory[]
 }
 
-export { UpsertTemplate, Simplifiedemplate };
+export { UpsertTemplate, SimplifiedTemplate };
