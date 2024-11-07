@@ -9,7 +9,6 @@ import {
 import { Category } from "../../src/entities/category.entity";
 
 import { v4 as uuidv4 } from "uuid";
-import e from "express";
 
 jest.mock("uuid");
 
@@ -35,7 +34,11 @@ describe("CRUD Service de Categories", () => {
     (uuidv4 as jest.Mock).mockReturnValue(categoryIdMock);
 
     const newCategory = createCategory(category);
-    const fullCategory = new Category(categoryIdMock, category.name, category.description);
+    const fullCategory = new Category(
+      categoryIdMock,
+      category.name,
+      category.description
+    );
 
     expect(newCategory).toEqual(fullCategory);
     expect(getAllCategories()).toStrictEqual([fullCategory]);
@@ -60,7 +63,11 @@ describe("CRUD Service de Categories", () => {
 
     createCategory(category);
 
-    const fullCategory = new Category(categoryIdMock, category.name, category.description);
+    const fullCategory = new Category(
+      categoryIdMock,
+      category.name,
+      category.description
+    );
 
     expect(getCategoryById(categoryIdMock)).toStrictEqual(fullCategory);
   });
@@ -76,7 +83,11 @@ describe("CRUD Service de Categories", () => {
 
     createCategory(category);
 
-    const fullCategory = new Category(categorydMock, category.name, category.description);
+    const fullCategory = new Category(
+      categorydMock,
+      category.name,
+      category.description
+    );
 
     expect(getAllCategories()).toStrictEqual([fullCategory]);
 
@@ -102,7 +113,7 @@ describe("CRUD Service de Categories", () => {
 
   test("deve atualizar um registro", () => {
     const category = {
-      name: "Category 1"
+      name: "Category 1",
     };
 
     const categoryIdMock = "44c8e5fd-5b1b-4099-8286-e799c64e4353";
@@ -118,7 +129,7 @@ describe("CRUD Service de Categories", () => {
 
     updateCategory(categoryIdMock, editCategory);
     expect(getAllCategories()).toStrictEqual([
-      new Category(categoryIdMock, editCategory.name, editCategory.description)
+      new Category(categoryIdMock, editCategory.name, editCategory.description),
     ]);
   });
 });
