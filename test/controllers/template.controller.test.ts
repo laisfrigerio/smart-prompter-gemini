@@ -1,7 +1,6 @@
 import supertest from "supertest";
 import { validate } from "uuid";
 import { app } from "../../src/app";
-import { Category } from "../../src/entities/category.entity";
 
 describe("Testando rotas de template", () => {
   test("deve retornar uma lista vazia quando nenhum template foi cadastrado", async () => {
