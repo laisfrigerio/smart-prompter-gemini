@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { Category } from "../entities/category.entity";
 import { NotFoundException } from "../exceptions/not-found.exception";
 
@@ -9,8 +7,8 @@ import {
   findAllCategories,
   findCategoryById,
   saveCategory,
-  removeCategory, 
-  resetCategoriesDb
+  removeCategory,
+  resetCategoriesDb,
 } from "../repositories/category.repository";
 
 const getAllCategories = (): Category[] => {
@@ -18,7 +16,7 @@ const getAllCategories = (): Category[] => {
 };
 
 const createCategory = ({ name, description }: UpsertCategory): Category => {
-  const newCategory: Category = Category.create(name, description);;
+  const newCategory: Category = Category.create(name, description);
   const category = saveCategory(newCategory);
   return category;
 };
