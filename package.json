@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --env-file=.env  --respawn --transpile-only src/index.ts",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "lint": "eslint ."
   },
   "keywords": [],
