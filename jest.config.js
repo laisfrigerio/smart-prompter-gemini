@@ -4,10 +4,10 @@ module.exports = {
   testMatch: ['**/*.test.ts'],
   coverageThreshold: {
     global: {
-      branches: 65,
-      functions: 65,
-      lines: 65,
-      statements: 65
+      branches: 95,
+      functions: 95,
+      lines: 95,
+      statements: 95
     }
   }
 };
