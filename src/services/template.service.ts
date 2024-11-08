@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
-
 import { Template } from "../entities/template.entity";
 import { NotFoundException } from "../exceptions/not-found.exception";
 
@@ -21,7 +19,7 @@ const getAllTemplates = (): Template[] => {
 };
 
 const createTemplate = ({ title, content }: UpsertTemplate): Template => {
-  const newTemplate: Template = Template.create(title, content);;
+  const newTemplate: Template = Template.create(title, content);
   const template = saveTemplate(newTemplate);
   return template;
 };
@@ -66,19 +64,22 @@ const attachCategory = (templateId: string, categoryId: string): Template => {
   const template = findTemplateById(templateId);
   const category = findCategoryById(categoryId);
 
-  if (!template) throw new NotFoundException(`Template with id ${templateId} not found`);
-  if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
+  if (!template)
+    throw new NotFoundException(`Template with id ${templateId} not found`);
+  if (!category)
+    throw new NotFoundException(`Category with id ${categoryId} not found`);
 
   return attachCategoryToTemplate(template, category);
 };
-
 
 const detachCategory = (templateId: string, categoryId: string): Template => {
   const template = findTemplateById(templateId);
   const category = findCategoryById(categoryId);
 
-  if (!template) throw new NotFoundException(`Template with id ${templateId} not found`);
-  if (!category) throw new NotFoundException(`Category with id ${categoryId} not found`);
+  if (!template)
+    throw new NotFoundException(`Template with id ${templateId} not found`);
+  if (!category)
+    throw new NotFoundException(`Category with id ${categoryId} not found`);
 
   return detachCategoryFromTemplate(template, category);
 };

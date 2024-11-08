@@ -1,7 +1,6 @@
 import supertest from "supertest";
 import { validate } from "uuid";
 import { app } from "../../src/app";
-import { Category } from "../../src/entities/category.entity";
 
 describe("Testando rotas de template", () => {
   test("deve retornar uma lista vazia quando nenhum template foi cadastrado", async () => {
@@ -28,7 +27,7 @@ describe("Testando rotas de template", () => {
     expect(responseCreate.body).toEqual({
       ...template,
       id: templateId,
-      categories: []
+      categories: [],
     });
 
     const responseGet = await supertest(app).get("/templates");
@@ -134,7 +133,7 @@ describe("Testando rotas de template", () => {
     expect(responseUpdate.body).toEqual({
       ...templateUpdated,
       id: templateId,
-      categories: []
+      categories: [],
     });
   });
 
@@ -169,25 +168,30 @@ describe("Associando categorias a um template", () => {
       name: "Category 1",
     };
 
-    const responseCreateCategory = await supertest(app).post("/categories").send(category);
+    const responseCreateCategory = await supertest(app)
+      .post("/categories")
+      .send(category);
 
     expect(responseCreateCategory.status).toEqual(201);
 
     const templateId = responseCreateTemplate.body.id;
     const categoryId = responseCreateCategory.body.id;
 
-    const responseAttachCategories = await supertest(app)
-      .post(`/templates/${templateId}/categories/${categoryId}`);
+    const responseAttachCategories = await supertest(app).post(
+      `/templates/${templateId}/categories/${categoryId}`
+    );
 
     expect(responseAttachCategories.status).toEqual(200);
     expect(responseAttachCategories.body).toStrictEqual({
       ...template,
       id: templateId,
-      categories: [{
-        id: responseCreateCategory.body.id,
-        name: responseCreateCategory.body.name,
-        description: responseCreateCategory.body.description
-      }],
+      categories: [
+        {
+          id: responseCreateCategory.body.id,
+          name: responseCreateCategory.body.name,
+          description: responseCreateCategory.body.description,
+        },
+      ],
     });
   });
 
@@ -195,8 +199,9 @@ describe("Associando categorias a um template", () => {
     const templateId = "11c8e5fd-5b1b-4099-8286-e799c64e4351";
     const categoryId = "22c8e5fd-5b1b-4099-8286-e799c64e4352";
 
-    const response = await supertest(app)
-      .post(`/templates/${templateId}/categories/${categoryId}`);
+    const response = await supertest(app).post(
+      `/templates/${templateId}/categories/${categoryId}`
+    );
 
     expect(response.status).toEqual(404);
     expect(response.body).toEqual({
@@ -217,8 +222,9 @@ describe("Associando categorias a um template", () => {
     const templateId = responseCreateTemplate.body.id;
     const categoryId = "22c8e5fd-5b1b-4099-8286-e799c64e4352";
 
-    const response = await supertest(app)
-      .post(`/templates/${templateId}/categories/${categoryId}`);
+    const response = await supertest(app).post(
+      `/templates/${templateId}/categories/${categoryId}`
+    );
 
     expect(response.status).toEqual(404);
     expect(response.body).toEqual({
@@ -240,8 +246,9 @@ describe("Desassociando categorias de um template", () => {
 
     const templateId = "608eff7e-8498-4a45-8455-4523ce1c13e5";
     const categoryId = "108eff7e-8498-4a45-8455-4523ce1c13e1";
-    const response = await supertest(app)
-      .delete(`/templates/${templateId}/categories/${categoryId}`);
+    const response = await supertest(app).delete(
+      `/templates/${templateId}/categories/${categoryId}`
+    );
 
     expect(response.status).toEqual(404);
     expect(response.body).toEqual({
@@ -270,15 +277,17 @@ describe("Desassociando categorias de um template", () => {
       .send(categoryOne);
     expect(responseCreateCategoryOne.status).toEqual(201);
 
-    const responseAttachCategory = await supertest(app)
-      .post(`/templates/${responseCreateTemplate.body.id}/categories/${responseCreateCategoryOne.body.id}`);
+    const responseAttachCategory = await supertest(app).post(
+      `/templates/${responseCreateTemplate.body.id}/categories/${responseCreateCategoryOne.body.id}`
+    );
     expect(responseAttachCategory.status).toEqual(200);
 
     const templateId = responseCreateTemplate.body.id;
     const categoryNotExistsId = "608eff7e-8498-4a45-8455-4523ce1c13e5";
 
-    const response = await supertest(app)
-      .delete(`/templates/${templateId}/categories/${categoryNotExistsId}`);
+    const response = await supertest(app).delete(
+      `/templates/${templateId}/categories/${categoryNotExistsId}`
+    );
 
     expect(response.status).toEqual(404);
     expect(response.body).toEqual({
@@ -309,14 +318,16 @@ describe("Desassociando categorias de um template", () => {
 
     const categoryId = responseCreateCategoryOne.body.id;
 
-    const responseAttachTag = await supertest(app)
-      .post(`/templates/${responseCreateTemplate.body.id}/categories/${categoryId}`);
+    const responseAttachTag = await supertest(app).post(
+      `/templates/${responseCreateTemplate.body.id}/categories/${categoryId}`
+    );
     expect(responseAttachTag.status).toEqual(200);
 
     const templateId = responseCreateTemplate.body.id;
 
-    const response = await supertest(app)
-      .delete(`/templates/${templateId}/categories/${categoryId}`);
+    const response = await supertest(app).delete(
+      `/templates/${templateId}/categories/${categoryId}`
+    );
 
     expect(response.status).toEqual(200);
     expect(response.body).toEqual({
