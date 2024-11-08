@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-import { Category } from "../entities/category.entity";
 
 import {
   getAllTemplates,
